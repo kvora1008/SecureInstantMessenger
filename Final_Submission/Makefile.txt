@@ -1,0 +1,43 @@
+# Directory containing the source files
+SRC_DIR = src
+
+# Directories for each module
+SERVER_DIR = $(SRC_DIR)/server
+CLIENT_DIR = $(SRC_DIR)/client
+COMMON_DIR = $(SRC_DIR)/common
+
+# Java Compiler
+JC = javac
+
+# Classpath for compilation (parent directory of src)
+CP = -cp $(SRC_DIR)
+
+# List of directories to compile
+DIRS = $(SERVER_DIR) $(CLIENT_DIR) $(COMMON_DIR)
+
+# Default target
+all: compile-server compile-client compile-common
+
+# Compile the server code
+compile-server:
+	$(JC) $(CP) $(SERVER_DIR)/*.java
+
+# Compile the client code
+compile-client:
+	$(JC) $(CP) $(CLIENT_DIR)/*.java
+
+# Compile the common code
+compile-common:
+	$(JC) $(CP) $(COMMON_DIR)/*.java
+
+# Clean up compiled classes
+clean:
+	rm -f $(SRC_DIR)/server/*.class $(SRC_DIR)/client/*.class $(SRC_DIR)/common/*.class
+
+# Run the server (example)
+run-server:
+	java -cp $(SRC_DIR) server.Server
+
+# Run the client (example)
+run-client:
+	java -cp $(SRC_DIR) client.Client
